@@ -2,18 +2,17 @@ var displayCurrentDay = document.querySelector("#currentDay");
 var currentDay = moment();
 displayCurrentDay.textContent = currentDay.format("dddd, MMMM Do YYYY");
 
-var timeBlock = $(".time-block").addClass("row");
-var blockText = $("<p>").addClass("description");
-timeBlock.append(blockText);
+// Time blocks for standard business hours //
+var timeBlocks = $(".time-block.row");
+var blockText = $("<textarea>").addClass("event-description col-sm-9");
+timeBlocks.append(blockText);
 
 var currentHour = parseInt(moment().format("H"));
 
+// Refreshes page, saved events persist // 
 var loadEvents = function (timeSlots) {
-
   timeSlots.forEach((element) => {
-    console.log(element);
     let text = localStorage.getItem(parseInt(element.time));
-    console.log(text);
     if (text) {
       element.text.val(text);
     }
@@ -22,8 +21,7 @@ var loadEvents = function (timeSlots) {
 
 var fetchEvents = function () {
   var tempArr = [];
-  // array iterator method
-  $("textarea").each(function (index, elem) {
+  $(".event-description").each(function (index, elem) {
     tempArr.push({
       time: $(elem).attr("id"),
       text: $(elem),
@@ -32,38 +30,37 @@ var fetchEvents = function () {
   loadEvents(tempArr);
 };
 
-$("textarea").each(function () {
+// Time blocks colored coced to indicate past, present, or future // 
+$(".event-description").each(function () {
   var $this = $(this);
   var id = parseInt($this.attr("id"));
 
   if (id < currentHour) {
-    $(this).addClass("past");
+    $this.addClass("past");
   }
   if (id > currentHour) {
-    $(this).addClass("future");
+    $this.addClass("future");
   }
   if (id === currentHour) {
-    $(this).addClass("present");
+    $this.addClass("present");
   }
 });
 
-$("button.saveBtn").click(function (event, loadEvents) {
+// Click the save button to add value to events // 
+$(".save-btn").click(function (event) {
   event.preventDefault();
 
-  var $element = $(this).siblings("textarea");
+  var $element = $(this).siblings(".event-description");
   var time = $element.attr("id");
-  console.log(time);
   var text = $element.val().trim();
-  console.log(text);
 
   if (time && text !== "") {
-    console.log(time, text);
     localStorage.setItem(time, text);
   }
 });
 
-$(".saveBtn").hover(function () {
-  $(this).addClass("saveBtn:hover");
+$(".save-btn").hover(function () {
+  $(this).addClass("save-btn:hover");
 });
 
 fetchEvents();
