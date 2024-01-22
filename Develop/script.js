@@ -1,15 +1,15 @@
-// Display current day at the top of the page
+// Displays current day at the top of the page
 var displayCurrentDay = document.querySelector("#currentDay");
 var currentDay = dayjs();
 displayCurrentDay.textContent = currentDay.format("dddd, MMMM Do YYYY");
 
-// Gets the current hour in 24-hour format
+// Gets the current hour
 var currentHour = parseInt(dayjs().format("H"));
 
-// Function loads events from localStorage
+// Function to load events from localStorage
 var loadEvents = function (timeSlots) {
     timeSlots.forEach((element) => {
-        let text = localStorage.getItem(parseInt(element.time));
+        let text = localStorage.getItem(element.time);
         if (text) {
             element.text.val(text);
         }
@@ -21,17 +21,18 @@ var fetchEvents = function () {
     var tempArr = [];
     $("textarea").each(function (index, elem) {
         tempArr.push({
-            time: $(elem).attr("id"),
+            time: $(elem).attr("id").replace("time-", ""),
             text: $(elem),
         });
     });
+    // Loads events from localStorage
     loadEvents(tempArr);
 };
 
-// Adds past, present, or future class to each column based on current hour
+// Adds past, present, or future class to each textblock based on current hour
 $("textarea").each(function () {
     var $this = $(this);
-    var id = parseInt($this.attr("id"));
+    var id = parseInt($this.attr("id").replace("time-", ""));
 
     if (id < currentHour) {
         $(this).addClass("past");
@@ -44,11 +45,11 @@ $("textarea").each(function () {
     }
 });
 
-// Saves button to click event
+// Saves button click event
 $("button.saveBtn").click(function (event) {
     event.preventDefault();
     var $element = $(this).siblings("textarea");
-    var time = $element.attr("id");
+    var time = $element.attr("id").replace("time-", "");
     var text = $element.val().trim();
 
     // Saves data to localStorage
@@ -62,5 +63,5 @@ $(".saveBtn").hover(function () {
     $(this).addClass("saveBtn:hover");
 });
 
-// Fetches and loads  events on page load
+// Fetchs and loads events on page load
 fetchEvents();
