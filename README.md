@@ -35,9 +35,6 @@ This Password Generator was created by Ben McCormick using the starter code prov
 ## Website
 https://mcrmickben45.github.io/Work-And-Daily-Planner/
 
-![Image 1]
-![Image 2]
-![Image 2]
-![Image 2]
+
 
 ## License
