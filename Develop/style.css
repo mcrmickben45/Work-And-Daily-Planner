@@ -25,7 +25,21 @@ body {
   .time-block {
     border-radius: 15px;
   }
+
+  time-block .save-btn {
+    border-left: 1px solid black;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: #06AED5;
+    color: white;
+  }
   
+  .time-block .save-btn:hover {
+    font-size: 20px;
+    transition: all .3s ease-in-out;
+    color: black;
+  }
+
   .row {
     border-top: 1px solid white;
   }
@@ -34,6 +48,7 @@ body {
     background-color: #ffffff;
     color: #000000;
     border-top: 1px dashed #000000;
+    padding: 20px;
   }
   
   .past {
@@ -49,18 +64,5 @@ body {
   .future {
     background-color: #77dd77;
     color: white;
-  }
-  
-  .saveBtn {
-    border-left: 1px solid black;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
-    background-color: #06aed5;
-    color: white;
-  }
-  
-  .saveBtn i:hover {
-    font-size: 20px;
-    transition: all 0.3s ease-in-out;
   }
   
