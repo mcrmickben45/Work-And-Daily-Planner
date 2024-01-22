@@ -1,66 +1,66 @@
+// Display current day at the top of the page
 var displayCurrentDay = document.querySelector("#currentDay");
-var currentDay = moment();
+var currentDay = dayjs();
 displayCurrentDay.textContent = currentDay.format("dddd, MMMM Do YYYY");
 
-// Time blocks for standard business hours //
-var timeBlocks = $(".time-block.row");
-var blockText = $("<textarea>").addClass("event-description col-sm-9");
-timeBlocks.append(blockText);
+// Gets the current hour in 24-hour format
+var currentHour = parseInt(dayjs().format("H"));
 
-var currentHour = parseInt(moment().format("H"));
-
-// Refreshes page, saved events persist // 
+// Function loads events from localStorage
 var loadEvents = function (timeSlots) {
-  timeSlots.forEach((element) => {
-    let text = localStorage.getItem(parseInt(element.time));
-    if (text) {
-      element.text.val(text);
-    }
-  });
-};
-
-var fetchEvents = function () {
-  var tempArr = [];
-  $(".event-description").each(function (index, elem) {
-    tempArr.push({
-      time: $(elem).attr("id"),
-      text: $(elem),
+    timeSlots.forEach((element) => {
+        let text = localStorage.getItem(parseInt(element.time));
+        if (text) {
+            element.text.val(text);
+        }
     });
-  });
-  loadEvents(tempArr);
 };
 
-// Time blocks colored coced to indicate past, present, or future // 
-$(".event-description").each(function () {
-  var $this = $(this);
-  var id = parseInt($this.attr("id"));
+// Function fetches and loads events on page
+var fetchEvents = function () {
+    var tempArr = [];
+    $("textarea").each(function (index, elem) {
+        tempArr.push({
+            time: $(elem).attr("id"),
+            text: $(elem),
+        });
+    });
+    loadEvents(tempArr);
+};
 
-  if (id < currentHour) {
-    $this.addClass("past");
-  }
-  if (id > currentHour) {
-    $this.addClass("future");
-  }
-  if (id === currentHour) {
-    $this.addClass("present");
-  }
+// Adds past, present, or future class to each column based on current hour
+$("textarea").each(function () {
+    var $this = $(this);
+    var id = parseInt($this.attr("id"));
+
+    if (id < currentHour) {
+        $(this).addClass("past");
+    }
+    if (id > currentHour) {
+        $(this).addClass("future");
+    }
+    if (id === currentHour) {
+        $(this).addClass("present");
+    }
 });
 
-// Click the save button to add value to events // 
-$(".save-btn").click(function (event) {
-  event.preventDefault();
+// Saves button to click event
+$("button.saveBtn").click(function (event) {
+    event.preventDefault();
+    var $element = $(this).siblings("textarea");
+    var time = $element.attr("id");
+    var text = $element.val().trim();
 
-  var $element = $(this).siblings(".event-description");
-  var time = $element.attr("id");
-  var text = $element.val().trim();
-
-  if (time && text !== "") {
-    localStorage.setItem(time, text);
-  }
+    // Saves data to localStorage
+    if (time && text !== "") {
+        localStorage.setItem(time, text);
+    }
 });
 
-$(".save-btn").hover(function () {
-  $(this).addClass("save-btn:hover");
+// Hover effect for save button
+$(".saveBtn").hover(function () {
+    $(this).addClass("saveBtn:hover");
 });
 
+// Fetches and loads  events on page load
 fetchEvents();
