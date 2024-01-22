@@ -1,6 +1,6 @@
 # Work Day Scheduler
 
-Employees with busy work schedules want to easily plan their work days given their 9am-5pm work schedules so that they can manage their time effectively. 
+Employees grappling with demanding work schedules seek a streamlined solution for efficiently organizing their workdays within the confines of the conventional 9 am to 5 pm work hours, aiming to enhance their overall time management effectiveness.
 
 ## Table of Contents
 
@@ -13,11 +13,14 @@ Employees with busy work schedules want to easily plan their work days given the
 
 ## Introduction
 
-Work and daily schedulers can provide more organization in order to maximize one's productivity and time management. The foundation of the daily scheduler utilizes html as the structure of our password generator, CSS to style the content and cosmetics of the generator, and JavaScript to input the functionality of the website to be able to generate a unique daily work schedule via a series of inputs given a user's provided criteria. Users can create daily schedules by opening the daily planner, viewing the current day at the top of the website, and then by scrolling down to view standard 9am-5pm business hours. Blocks will indicate whether the planned event is in the past, present, or future. Users will be able to click on the block and enter an event and then click the save button to save their entry to local storage. When the page is refreshed, the inputted events in the daily planner persist. 
+The integration of work and daily schedulers constitutes an effective approach for enhancing productivity and optimizing time management. This project leverages HTML as the foundational structure for the daily scheduler, utilizes CSS for refining the visual aesthetics and styling of the scheduler, and employs JavaScript to imbue the website with functionality, enabling the generation of a bespoke daily work schedule based on user-specified criteria. Users can seamlessly create daily schedules by accessing the daily planner, observing the current day prominently displayed at the webpage's apex, and subsequently navigating through standard 9 am to 5 pm business hours. The delineated blocks within this timeframe distinctly indicate whether a planned event resides in the past, present, or future temporal context. Facilitating user engagement, the interface allows for the entry of events upon clicking a designated block, with a subsequent save operation that persists the inputted data to local storage. Notably, the durability of user entries transcends temporary browser sessions, ensuring the sustained availability of the recorded events even after the page is refreshed.
 
 ## Usage
 1. Open the daily scheduler URL in browser.
-2. Edit blocks to add daily events by time and save planned events. 
+2. View current day.
+3. Navigate to business hours.
+4. Identify past, present, and future blocks. 
+5. Enter event information, save entry, and view persisting entries.
 
 ## Configuration
 Built using:
